@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Studio Code-like Background with Line Numbers</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="header">
+      <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">Calculator App</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                      <li class="nav-item">
+                          <a class="nav-link" href="index.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="app.html">The App</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="code.html">The code</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="https://github.com/Parviz-khrl/calculatorapp" target="_blank">Git Repo</a>
+                      </li>
+                      <li class="nav-item">
+                         <a class="nav-link" href="https://parvizkportfolio.netlify.app/" target="_blank">About</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+    </header>
+
+    <main class="main-code">
+        <div class="code-header">The Code for Calculator App</div>
+        <div class="code-container1">
+            <div class="code-container">
+                <div class="line-numbers" id="line-numbers-container">
+                </div>
+                <div class="code-editor">
+<pre id="code-content">
+    <span id="comments">// This function waits for the DOM content to be fully loaded before executing the code within it</span>
+    document.<span id="comment-yellow">addEventListener</span>('DOMContentLoaded', <span id="comment-blue">function</span> () {
+    <span id="comments">// Selecting the display element and all buttons</span>
+    <span id="comment-blue">const</span> display = document.<span id="comment-yellow">querySelector</span>('.display');
+        <span id="comment-blue">const</span> buttons = document.<span id="comment-yellow">querySelectorAll</span>('.button');
+    
+      <span id="comments">// Initializing a variable to store the current input</span>
+      <span id="comment-blue">let</span> currentInput = '';
+    
+      <span id="comments">// Adding event listeners to all buttons</span>
+      buttons.<span id="comment-yellow">forEach</span>(button => {
+          button.<span id="comment-yellow">addEventListener</span>('click', () => {
+              <span id="comment-blue">const</span> buttonText = button.<span id="comment-yellow">textContent</span>;
+    
+              <span id="comments">// Handling different button clicks</span>
+              <span id="comment-blue">if</span> (buttonText === 'AC') {
+                  currentInput = ''; <span id="comments">// Clear the input</span>
+              } <span id="comment-blue">else if</span> (buttonText === '+/-') {
+                  currentInput = eval('-' + currentInput); <span id="comments">// Negate the input</span>
+              } <span id="comment-blue">else if</span> (buttonText === '=') {
+                  currentInput = eval(currentInput); <span id="comments">// Evaluate the expression</span>
+              } <span id="comment-blue">else</span> {
+                  currentInput += buttonText; <span id="comments">// Concatenate input</span>
+              }
+    
+              <span id="comments">// Update the display with the current input</span>
+              display.<span id="comment-yellow">textContent</span> = currentInput;
+          });
+      });
+    
+      <span id="comments">// Adding event listener to handle keyboard input</span>
+      document.<span id="comment-yellow">addEventListener</span>('keydown', (event) => {
+        <span id="comment-blue">const</span> key = event.<span id="comment-yellow">key</span>;
+    
+          <span id="comments">// Handling different keyboard inputs</span>
+          <span id="comment-blue">if</span> (!isNaN(parseInt(key))) {
+              currentInput += key; <span id="comments">// Append number to input</span>
+          } <span id="comment-blue">else if</span> (key === '+' || key === '-' || key === '*' || key === '/' || key === '.') {
+              currentInput += key; <span id="comments">// Append operator to input</span>
+          } <span id="comment-blue">else if</span> (key === 'Enter') {
+              currentInput = eval(currentInput); <span id="comments">// Evaluate expression on Enter</span>
+          } <span id="comment-blue">else if</span> (key === 'Backspace') {
+              currentInput = currentInput.slice(0, -1); <span id="comments">// Remove last character on Backspace</span>
+          } <span id="comment-blue">else if</span> (key === 'Escape') {
+              currentInput = ''; <span id="comments">// Clear input on Escape</span>
+          }
+    
+          <span id="comments">// Update the display with the current input</span>
+          display.<span id="comment-yellow">textContent</span> = currentInput;
+      });
+    });
+    
+    <span id="comments">// This function also waits for the DOM content to be fully loaded before executing the code within it</span>
+    document.<span id="comment-yellow">addEventListener</span>("DOMContentLoaded", <span id="comment-blue">function</span>() {
+        <span id="comments">// Selecting the container for line numbers and the code content</span>
+        <span id="comment-blue">const</span> lineNumbersContainer = document.<span id="comment-yellow">getElementById</span>("line-numbers-container");
+        <span id="comment-blue">const</span> codeContent = document.<span id="comment-yellow">getElementById</span>("code-content");
+        <span id="comments">// Splitting the code content by lines and adding line numbers to the container</span>
+        <span id="comment-blue">const</span> lines = codeContent.<span id="comment-yellow">innerText</span>.split("\n");
+        <span id="comment-blue">for</span> (<span id="comment-blue">let</span> i = 1; i <= lines.length; i++) {
+            <span id="comment-blue">const</span> lineNumberElement = document.<span id="comment-yellow">createElement</span>("pre");
+            lineNumberElement.<span id="comment-yellow">setAttribute</span>("data-line", i);
+            lineNumberElement.<span id="comment-yellow">textContent</span> = i;
+            lineNumbersContainer.<span id="comment-yellow">appendChild</span>(lineNumberElement);
+        }
+    });
+</pre>
+                </div>
+            </div>
+            <div class="description-cont">
+                <div>
+                    <ol>
+                        <li>Event Listener for DOM Content Loaded:</li>
+                        <p>The code begins with an event listener attached to the 'DOMContentLoaded' event.</p>
+                        <p>Inside this event listener, functionality related to handling user interactions is set up.</p>
+
+                        <li>Button and Keyboard Input Handling:</li>
+                        <p>Within the 'DOMContentLoaded' event listener, the code defines logic to handle button clicks and keyboard inputs.
+                        <p>It selects relevant DOM elements (e.g., display and buttons) and attaches event listeners to them.</p>
+                        <p>For button clicks, it defines actions based on the text content of the clicked button (e.g., clearing input, evaluating expressions).</p>
+                        <p>For keyboard inputs, it listens for specific keys and performs actions accordingly (e.g., evaluating expressions, clearing input).</p>
+                        </p>
+
+                        <li>Event Listener for Line Number Population:</li>
+                        <p>Following the previous code block, there's another event listener attached to the 'DOMContentLoaded' event.</p>
+                        <p>This event listener is separate from the first one and is used for a different purpose.</p>
+                     
+                        <li>Line Number Population Functionality:</li>
+                        <p>Inside the second 'DOMContentLoaded' event listener, code for populating line numbers for a code block is defined.</p>
+                        <p>It selects relevant DOM elements (e.g., container for line numbers, code content) and generates line number elements based on the content of the code block.</p>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+          <h3>Parviz Khairullaev</h3>
+        </div>
+        <div class="footer-icons">
+          <a href="https://www.linkedin.com/in/parviz-khairullaev-413b42216/" target="_blank">
+            <img src="./linkedin.png" alt="linkedinicon" class="icon" />
+          </a>
+          <a href="https://github.com/Parviz-khrl" target="_blank">
+            <img src="./github.png" alt="githubicon" class="icon" />
+          </a>
+        </div>
+      </footer>
+      
+    <script src="./main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
